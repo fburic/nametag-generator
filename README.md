@@ -33,6 +33,9 @@ Tweak `nametags.tex`. "Ticket" refers to a nametag.
 Keep in mind that the `\put(x, y)` command considers coordinate `(0, 0)`
 to be the lower-left corner.
 
+One can also change the style of the cutting guiding lines if 
+the current ones are too difficult to discern.
+
 ### Generating
 
 Either open `nametags.tex` in your LaTeX editor and create the PDF
