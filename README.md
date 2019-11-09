@@ -2,7 +2,8 @@
 
 Create a PDF file with nametags using only LaTeX and a CSV list of participants.
 
-Adapted from https://tex.stackexchange.com/a/94600 to use the `csvsimple` package.
+Adapted from https://tex.stackexchange.com/a/94600 to use the `csvsimple` package
+instead of hard-coding the items in the .tex file.
 
 ## Requirements
 
