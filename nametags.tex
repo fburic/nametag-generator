@@ -1,0 +1,58 @@
+%%%%%%%%%%%%
+%  
+% Generate name tags from CSV list of participants.
+% Needs files: logo.png, participants.csv
+%
+% The CSV list is expected to have columns:
+%   Name, AffiliationFirst, AffiliationSecond
+% Change the csvreader command to match CSV otherwise.
+%
+% Adapted from https://tex.stackexchange.com/a/94600 to use csvreader
+% 
+%%%%%%%%%%%%
+
+\documentclass[a4paper,10pt]{letter}
+
+% Load ticket.sty with the appropriate ticket definition
+\usepackage[freepin,cutmark]{ticket}
+
+% Adjustments for 94 x 60 mm. 
+% Note: The unit must match in the ticket defs below.
+\unitlength=1mm
+\ticketSize{94}{60}
+\ticketDistance{0}{0}
+\ticketNumbers{2}{4}   % How many per page {horiz}{vertical}
+\hoffset=-16mm
+\voffset=-16mm
+
+% Load misc stuff
+\usepackage{graphicx, csvsimple}
+\usepackage[utf8]{inputenc}  % ! Please make sure the CSV has the same encoding
+
+
+% Unique ticket background
+% Coordinates for \put are in the same unit as set for ticket (default: mm)
+\renewcommand{\ticketdefault}{%
+  \put( 2,  1){\includegraphics[width=20mm]{logo.png}}
+  \put( 2, 22){\line(1,0){90}}
+  \put( 24, 16){\small International}
+  \put( 24, 13){\small Science Conference}
+  \put( 24, 9){\small City, Country}
+  \put( 24, 6){\small 9 -- 10th May 2019}
+}
+
+% Ticket content format
+\newcommand{\nametag}[3]{\ticket{%
+    \put(45,43){\makebox[0mm]{\bfseries\Large #1}}
+    \put(6,32){\makebox[0mm][l]{\bfseries\normalsize #2}}
+    \put(6,27){\makebox[0mm][l]{\bfseries\normalsize #3}}%
+}}
+
+
+% Use csvreader to create a ticket for each entry
+\begin{document}
+\sffamily
+\csvreader[head to column names]{participants.csv}{} {
+    \nametag{\Name}{\AffiliationFirst}{\AffiliationSecond}
+}
+\end{document}
